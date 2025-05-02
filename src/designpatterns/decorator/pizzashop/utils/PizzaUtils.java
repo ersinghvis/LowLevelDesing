@@ -2,10 +2,8 @@ package designpatterns.decorator.pizzashop.utils;
 
 import designpatterns.decorator.pizzashop.abstracts.BasePizza;
 import designpatterns.decorator.pizzashop.constants.PizzaConstants;
-import designpatterns.decorator.pizzashop.decorator.ExtraCheese;
-import designpatterns.decorator.pizzashop.decorator.Jalapenos;
-import designpatterns.decorator.pizzashop.decorator.Mushrooms;
-import designpatterns.decorator.pizzashop.decorator.Olives;
+import designpatterns.decorator.pizzashop.enums.ToppingType;
+import designpatterns.decorator.pizzashop.factories.ToppingFactory;
 import designpatterns.decorator.pizzashop.pizza.CustomPizza;
 
 import java.util.List;
@@ -33,16 +31,8 @@ public class PizzaUtils {
 
     private double getPizzaCostWithToppings(CustomPizza pizza){
         BasePizza currPizza = pizza.getBasePizza();
-        for(String topping : pizza.getToppings()){
-            if( PizzaConstants.TOPPING_EXTRA_CHEESE.equals(topping) ){
-                currPizza = new ExtraCheese(currPizza);
-            }else if( PizzaConstants.TOPPING_JALAPENOS.equals(topping) ){
-                currPizza = new Jalapenos(currPizza);
-            }else if( PizzaConstants.TOPPING_MUSHROOMS.equals(topping)){
-                currPizza = new Mushrooms(currPizza);
-            } else if (PizzaConstants.TOPPING_OLIVES.equals(topping)) {
-                currPizza = new Olives(currPizza);
-            }
+        for(ToppingType topping : pizza.getToppings()){
+            currPizza = ToppingFactory.getPizzaToppings(topping, currPizza);
         }
         return currPizza.cost();
     }

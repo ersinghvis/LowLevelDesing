@@ -1,6 +1,7 @@
 package designpatterns.decorator.pizzashop.pizza;
 
 import designpatterns.decorator.pizzashop.abstracts.BasePizza;
+import designpatterns.decorator.pizzashop.enums.ToppingType;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class CustomPizza {
 
     private long pizzaId;
 
-    private List<String> toppings;
+    private List<ToppingType> toppings;
 
     private BasePizza basePizza;
 
@@ -30,11 +31,11 @@ public class CustomPizza {
         this.size = size;
     }
 
-    public List<String> getToppings() {
+    public List<ToppingType> getToppings() {
         return toppings;
     }
 
-    public void setToppings(List<String> toppings) {
+    public void setToppings(List<ToppingType> toppings) {
         this.toppings = toppings;
     }
 
