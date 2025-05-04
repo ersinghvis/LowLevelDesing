@@ -16,79 +16,67 @@ public class PlayingBoardUtils {
                 printPiece(board[i][j]);
             }
         }
+        System.out.println();
     }
 
     private void printPiece(PlayingPiece piece){
         if( piece == null ){
-            System.out.print(" | ");
+            System.out.print(" * ");
         }
         else if(PieceType.O == piece.getPieceType() ){
-            System.out.print("| O ");
+            System.out.print(" O ");
         }else if( PieceType.X == piece.getPieceType() ){
-            System.out.print("| X ");
+            System.out.print(" X ");
         }
     }
 
-    public boolean isWin(PlayingPiece[][] board, PlayingPiece playingPiece, int i, int j){
-        int row = i;
-        int col = j;
-        //Check left-up diagonal
-        while( row >= 0 &&  col >= 0){
-            if( board[row][col] == null || board[row][col] != playingPiece ){
-                return false;
+    public boolean isWin(PlayingPiece[][] board, PlayingPiece playingPiece, int row, int col) {
+        // Check row
+        boolean win = true;
+        for (int j = 0; j < 3; j++) {
+            if (board[row][j] == null || board[row][j].getPieceType() != playingPiece.getPieceType()) {
+                win = false;
+                break;
             }
-            row--;
-            col--;
         }
-        //Check right-up diagonal
-        row = i;
-        col = j;
-        while( row >= 0 &&  col < 3){
-            if( board[row][col] == null || board[row][col] != playingPiece ){
-                return false;
+        if (win) return true;
+
+        // Check column
+        win = true;
+        for (int i = 0; i < 3; i++) {
+            if (board[i][col] == null || board[i][col].getPieceType() != playingPiece.getPieceType()) {
+                win = false;
+                break;
             }
-            row--;
-            col++;
         }
-        //Check left-down
-        row = i;
-        col = j;
-        while( row < 3 &&  col >= 0){
-            if( board[row][col] == null || board[row][col] != playingPiece ){
-                return false;
+        if (win) return true;
+
+        // Check primary diagonal
+        if (row == col) {
+            win = true;
+            for (int i = 0; i < 3; i++) {
+                if (board[i][i] == null || board[i][i].getPieceType() != playingPiece.getPieceType()) {
+                    win = false;
+                    break;
+                }
             }
-            row++;
-            col--;
+            if (win) return true;
         }
-        //Check right-down
-        row = i;
-        col = j;
-        while( row < 3 &&  col < 3){
-            if( board[row][col] == null || board[row][col] != playingPiece ){
-                return false;
+
+        // Check secondary diagonal
+        if (row + col == 2) {
+            win = true;
+            for (int i = 0; i < 3; i++) {
+                if (board[i][2 - i] == null || board[i][2 - i].getPieceType() != playingPiece.getPieceType()) {
+                    win = false;
+                    break;
+                }
             }
-            row++;
-            col++;
+            if (win) return true;
         }
-        //Check row
-        row = i;
-        col = 0;
-        while( col < 3){
-            if( board[row][col] == null || board[row][col] != playingPiece ){
-                return false;
-            }
-            col++;
-        }
-        //Check col
-        row = 0;
-        col = j;
-        while( row < 3){
-            if( board[row][col] == null || board[row][col] != playingPiece ){
-                return false;
-            }
-            row++;
-        }
-        return true;
+
+        return false;
     }
+
 
 }

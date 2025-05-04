@@ -1,6 +1,7 @@
 package designpatterns.decorator.pizzashop.impl;
 
 import designpatterns.decorator.pizzashop.abstracts.BasePizza;
+import designpatterns.decorator.pizzashop.enums.ToppingType;
 import designpatterns.decorator.pizzashop.interfaces.IOrder;
 import designpatterns.decorator.pizzashop.pizza.CustomPizza;
 import designpatterns.decorator.pizzashop.utils.PizzaUtils;
@@ -52,7 +53,7 @@ public class Order implements IOrder {
     }
 
     @Override
-    public void addToppings(int pizzaId, String topping) {
+    public void addToppings(int pizzaId, ToppingType topping) {
         if( pizzaId >= pizzas.size() ){
             System.out.println("Invalid Pizza");
             return;

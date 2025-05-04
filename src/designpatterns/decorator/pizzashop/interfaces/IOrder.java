@@ -1,6 +1,7 @@
 package designpatterns.decorator.pizzashop.interfaces;
 
 import designpatterns.decorator.pizzashop.abstracts.BasePizza;
+import designpatterns.decorator.pizzashop.enums.ToppingType;
 
 public interface IOrder {
 
@@ -10,6 +11,6 @@ public interface IOrder {
 
     public double getBill();
 
-    public void addToppings(int pizzaId, String topping);
+    public void addToppings(int pizzaId, ToppingType topping);
 
 }
